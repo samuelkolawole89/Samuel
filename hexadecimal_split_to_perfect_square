@@ -1,0 +1,33 @@
+#python code to split hexadecimal into two perfect square
+#import math function as it will be used for mathematical computations e.g sqrt
+#split the hexadecimal into two by creating a loop across the hexadecimal string
+#that would leave us with two sliced value
+#then check if the left and right value is an hexadecimal
+#if true, convert left and right value to decimal
+#find the square root of the result
+#if both result gotten from the square root is integer, it means the hexadecimal split is a perfect square
+#finally, return the number of perfect squares derived from splits across the loop
+
+
+def check_hex(da):
+	import math
+	len_hex = len(da)
+	count = 0
+	for i in xrange(len_hex):
+		left = da[0:i]
+		right = da[i:len_hex]
+		if re.search(r'^[0-9a-fA-F]+$', left) is not None and re.search(r'^[0-9a-fA-F]+$', right) is not None:
+			dec_left = int(left, 16)
+			dec_right = int(right, 16)
+			sqrt_left = math.sqrt (dec_left)
+			sqrt_right = math.sqrt(dec_right)
+			if sqrt_left.is_integer() is True and sqrt_right.is_integer() is True:
+				count = count + 1
+	return count
+  
+  
+  >>> check_hex("51")
+0
+>>> check_hex("5151")
+1
+
