@@ -1,0 +1,60 @@
+#the following python program reorders each line in a log file by placing alphanumeric before other strings 
+#while other strings would be arranged in alphabethical order
+
+#the program has been properly commented for better understanding
+
+#sample input :   are ar9 bed
+#                 acd arn ae4
+#                 a7b ant abq
+                  
+#sample output :  ar9 are bed
+#                 ae4 acd arn
+#                 a7b abq ant
+               
+
+
+def reorderlogfile(arr):
+	myfile = open(arr)
+	# OR  myfile = open(arr,  'r')
+	arr = myfile.read().splitlines()
+	new_file = open(new_server, 'w')
+	for a in xrange(len(arr)):
+		str_ = ''
+		#convert each list to string
+		string = str_.join(arr[a])
+		#convert string to list so as to be able to access individual elements
+		list_ = string.split()
+		for i in xrange(len(list_)):
+			#isalpha() means is alphabeth
+			if not list_[i].isalpha():
+				#string[i] must be reassigned to a new variable or converted
+				#to string before it can be removed
+				#stri = list_[i]
+				stri = ''.join(list_[i])
+				list_.remove(stri)
+				list_ = sorted(list_)
+				list_.insert(0,stri)
+				#list_.insert(len(string) - 1, stri)
+		#create space in between string
+		list_ = ' '.join(list_)
+		#write into new_file
+		new_file.write(list_)
+		#new line
+		new_file.write("\n")
+		#new_list.append([list_])
+	new_file.close()
+	myfile.close()
+	#read and print data from file
+	new_file = open(new_server)
+	#OR  new_file = open(new_server, 'r')
+	print new_file.read()
+	new_file.close()
+  
+  
+  
+  >>> filepath = "C:/Users/........"
+  >>> reorderlogfile(filepath)
+ar9 are bed
+ae4 acd arn
+a7b abq ant
+
