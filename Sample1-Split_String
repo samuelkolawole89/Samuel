@@ -1,0 +1,33 @@
+//this Simple PHP class created by me is meant to tell the user different information contained in a string
+//if the string contains "Boss" and the count of element in string is 1, display "Welcome, Boss" to the user
+
+//if the string contains other name and the count of element is 1, display "Welcome, $this->bodyText" to the user
+//if the string contains other name and the count of element is more than 1, display the last element in the string i.e display "Welcome, 'last element'" to the user
+
+class TextBox {
+ var $bodyText;
+ // Constructor function
+ function __construct($newText) {
+ $this->bodyText = $newText;
+ }
+ function display() {
+     
+     $newvar = explode(",", $this->bodyText);
+ 
+      if (count($newvar) == 1){
+         print ("<table><tr><td><font color = 'white'>Welcome, $this->bodyText</font>"
+         . "</td></tr></table>");
+     }
+     
+     //print "<font color = 'white'>".count($newvar)."</font>";
+     elseif (count($newvar) > 1){
+         //$newvar = explode(",", $this->bodyText);
+         $end = end($newvar);
+        print ("<table><tr><td><font color = 'white'>Welcome, $end</font>"
+         . "</td></tr></table>");
+     }
+ }
+}
+
+$box = new TextBox("John,James,Steven");
+$box->display();
