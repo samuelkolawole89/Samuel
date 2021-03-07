@@ -1,0 +1,24 @@
+#FIRST NON REPEATING CHARACTER IN A STRING
+#this is a python code that uses hash table in the mode of dictionaries i.e counts = {}
+#loop through each character "c" in string "str1"
+#if c in counts, its value in dictionary would be increased by 1
+#if c not in counts, its value in dictionary becomes 1 and it is appended to character_order list
+
+#loop through character_order list to find the first character whose value in counts is 1
+#if found, return the value - c
+#else return None
+
+
+def fnrc(str1):
+	character_order = []
+	counts = {}
+	for c in str1:
+		if c in counts:
+			counts[c] += 1
+		else:
+			counts[c] = 1
+			character_order.append(c)
+	for c in character_order:
+		if counts[c] == 1:
+			return c
+	return None
