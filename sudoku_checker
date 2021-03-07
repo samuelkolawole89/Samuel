@@ -1,0 +1,119 @@
+//SUDOKU TESTER
+
+
+function sudoku($sudoku){
+$sudoku_group_range = array();
+$vertical_range = array();
+$horizontal_range = array();
+$array_left = array(
+    array(0,0),
+    array(0,3),
+    array(0,6),
+    array(3,0),
+    array(3,3),
+    array(3,6),
+    array(6,0),
+    array(6,3),
+    array(6,6)
+);
+
+$check_count = 0;
+
+for ($i = 0; $i < 9; $i++){
+    for ($j = 0; $j < 9; $j++){
+             
+            //the below represent the group i.e the square box - step a
+            for ($k = 0; $k < 9; $k++){
+                for($l = 0; $l < 2; $l++){
+                    //left side of $array_left
+                    if($l == 0){
+                    $inc_left = $array_left[$k][$l] + 2;
+                    $sudoku_left = $array_left[$k][$l];
+                    }
+                    //right side of $array_left
+                    if($l == 1){
+                    $inc_right = $array_left[$k][$l] + 2;
+                    $sudoku_right = $array_left[$k][$l];
+                    }
+                    //$left_movement = $i;
+                    //$right_movement = $j;
+                }
+                    if($i >= $sudoku_left and $i <= $inc_left and $j >= $sudoku_right and $j <= $inc_right){
+                        for ($m = $sudoku_left; $m <= $inc_left; $m++){
+                            for($o = $sudoku_right; $o <= $inc_right; $o++){
+                                $sudoku_group_range[] = $sudoku[$m][$o];
+                            }
+                        }
+                    }
+            }
+            
+
+
+            //the below represents the vertical axis(straight line from up to down) - constraint 2
+            for($p = 0; $p < 9; $p++){
+                    $vertical_range[] = $sudoku[$p][$j];
+            }
+            //the below represent the horizontal axis(straight line from left to right) - constraint 3
+            for ($q = 0; $q < 9; $q++){
+                    $horizontal_range[] = $sudoku[$i][$q];
+            }
+            
+            //count the number of occurence of the value across the $sudoku_group_range,
+            //$horizontal_range and $vertical_range respectively
+            $sudoku_group_range_count = array_count_values($sudoku_group_range);
+            $count_each_ele_in_sudoku_group = $sudoku_group_range_count[$sudoku[$i][$j]];
+
+            $horizontal_range_count = array_count_values($horizontal_range);
+            $count_each_ele_in_horizontal = $horizontal_range_count[$sudoku[$i][$j]];
+
+            $vertical_range_count = array_count_values($vertical_range);
+            $count_each_ele_in_vertical = $vertical_range_count[$sudoku[$i][$j]];
+
+            //if number of occurence count is 1 across $sudoku_group_range, $horizontal_range
+            //and $vertical_range, then increment $check_count
+            if($count_each_ele_in_sudoku_group == 1  
+                    && $count_each_ele_in_horizontal == 1 
+                    && $count_each_ele_in_vertical == 1){
+                $check_count = $check_count + 1;
+
+            }
+            
+            //at every instance of the $sudoku_loop, 
+            //clear/unset $sudoku_group_range, $horizontal_range
+            //and $vertical_range array after processing
+            $sudoku_group_range = array();
+            $vertical_range = array();
+            $horizontal_range = array();
+
+    }
+}
+
+//$check_count = 81 means the sudoku is right after completing
+//processing for all Sudoku values
+if($check_count == 81){
+    return "correctly solved";
+}
+//else one or more puzzle across sudoku group cell is wrong
+else{
+    return "incorrectly solved";
+}
+}
+
+
+
+
+//SAMPLE INPUT
+$sudok = array(
+    array(1,8,2,5,4,3,6,9,7),
+    array(9,6,5,1,7,8,3,4,2),
+    array(7,4,3,9,6,2,8,1,5),
+    array(3,7,4,8,9,6,5,2,1),
+    array(6,2,8,4,5,1,7,3,9),
+    array(5,1,9,2,3,7,4,6,8),
+    array(2,9,7,6,8,4,1,5,3),
+    array(4,3,1,7,2,5,9,8,6),
+    array(8,5,6,3,1,9,2,7,4)
+);
+
+//DISPLAY OUTPUT
+echo sudoku($sudok);
