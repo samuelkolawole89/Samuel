@@ -1,0 +1,260 @@
+<?php
+//the connection string stored into config.php;
+function db_connect(){
+$HOST = 'localhost';
+$USER = 'root';
+$PSWD = '';
+$DB = 'be_test';
+$mysqli = new mysqli($HOST, $USER, $PSWD, $DB);
+    if ($mysqli === false){
+        die("ERROR:Could not connect." .$mysqli->connect_error);
+    }
+return $mysqli;
+
+}
+
+//the class file called department.php
+require_once ('Config.php');
+
+class Departments
+{
+   var $id;
+   var $collegeid;
+   var $department;
+   var $departmentshortname;
+   var $entrydate;
+   var $createdby;
+   var $datemodified;
+   var $modifiedby;
+   var $beginsesid;
+   var $currenthodid;
+   var $previoushodid;
+   var $currentexamofficerid;
+   var $previousexamofficerid;
+   var $currentcourseadviserid;
+   var $previouscourseadviserid;
+   var $status;
+   
+   var $beginn;
+   var $endin;
+   
+   
+   //getters and setters function
+    public function getId()
+   {
+       return$this->id;
+   }
+   
+   public function setId($id)
+   {
+       $this->id=$id;
+   }
+  
+   public function getCollegeId()
+   {
+       return$this->collegeid;
+   }
+   
+   public function setCollegeId($collegeid)
+   {
+       $this->collegeid=$collegeid;
+   }
+   
+   
+    public function getDepartment()
+   {
+       return$this->department;
+   }
+   
+   public function setDepartment($department)
+   {
+       $this->department=$department;
+   }
+   
+   public function getDepartmentShortName()
+   {
+       return$this->departmentshortname;
+   }
+   
+   public function setDepartmentShortName($departmentshortname)
+   {
+       $this->departmentshortname=$departmentshortname;
+   }
+   
+   public function getEntryDate()
+   {
+       return$this->entrydate;
+   }
+   
+   public function setEntryDate($entrydate)
+   {
+       $this->entrydate=$entrydate;
+   }
+   
+   public function getCreatedBy()
+   {
+       return$this->createdby;
+   }
+   
+   public function setCreatedBy($createdby)
+   {
+       $this->createdby=$createdby;
+   }
+   
+    public function getDateModified()
+   {
+       return$this->datemodified;
+   }
+   
+   public function setDateModified($datemodified)
+   {
+       $this->datemodified=$datemodified;
+   }
+   
+   public function getModifiedBy()
+   {
+       return$this->modifiedby;
+   }
+   
+   public function setModifiedBy($modifiedby)
+   {
+       $this->modifiedby=$modifiedby;
+   }
+   
+   public function getBeginSesId()
+   {
+       return$this->beginsesid;
+   }
+   
+   public function setBeginSesId($beginsesid)
+   {
+       $this->beginsesid=$beginsesid;
+   }
+   
+   
+   public function getCurrentHodId()
+   {
+       return$this->currenthodid;
+   }
+   
+   public function setCurrentHodId($currenthodid)
+   {
+       $this->currenthodid=$currenthodid;
+   }
+   
+   
+   public function getPreviousHodId()
+   {
+       return$this->previoushodid;
+   }
+   
+   public function setPreviousHodId($previoushodid)
+   {
+       $this->previoushodid=$previoushodid;
+   }
+   
+   public function getCurrentExamOfficerId()
+   {
+       return$this->currentexamofficerid;
+   }
+   
+   public function setCurrentExamOfficerId($currentexamofficerid)
+   {
+       $this->currentexamofficerid=$currentexamofficerid;
+   }
+   
+   public function getPreviousExamOfficerId()
+   {
+       return$this->previousexamofficerid;
+   }
+   
+   public function setPreviousExamOfficerId($previousexamofficerid)
+   {
+       $this->previousexamofficerid=$previousexamofficerid;
+   }
+   
+   public function getCurrentCourseAdviserId()
+   {
+       return$this->currentcourseadviserid;
+   }
+   
+   public function setCurrentCourseAdviserId($currentcourseadviserid)
+   {
+       $this->currentcourseadviserid=$currentcourseadviserid;
+   }
+   
+   public function getPreviousCourseAdviserId()
+   {
+       return$this->previouscourseadviserid;
+   }
+   
+   public function setPreviousCourseAdviserId($previouscourseadviserid)
+   {
+       $this->previouscourseadviserid=$previouscourseadviserid;
+   }
+   
+   public function getStatus()
+   {
+       return$this->status;
+   }
+   
+   public function setStatus($status)
+   {
+       $this->status=$status;
+   }
+   
+   public function getBeginn()
+   {
+       return$this->beginn;
+   }
+   
+   public function setBeginn($beginn)
+   {
+       $this->beginn=$beginn;
+   }
+   
+   public function getEndin()
+   {
+       return$this->endin;
+   }
+   
+   public function setEndin($endin)
+   {
+       $this->endin=$endin;
+   }
+   
+   public function insertNewDepartments()
+   {
+       $mydb = db_connect();
+       $sql = "INSERT INTO tbldepartment(collegeid,departmentlongname,departmentshortname,beginsessionid, currenthodid, previoushodid, currentexamofficerid, previousexamofficerid, currentcourseadviserid, previouscourseadviserid, datetimecreated, createdby)VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
+       $stmt= $mydb->prepare($sql);  
+       $stmt->bind_param('isssisssssss', $this->collegeid,  $this->department, $this->departmentshortname, $this->beginsesid, $this->currenthodid, $this->previoushodid, $this->currentexamofficerid, $this->previousexamofficerid, $this->currentcourseadviserid, $this->previouscourseadviserid, $this->entrydate, $this->createdby);  
+       $stmt->execute();
+       $stmt->get_result();
+       $mydb->close();
+   }
+   
+   public function UpdateDepartment_Status()
+   {      
+      $mydb = db_connect();
+      $sql = "update tbldepartment set recordstatus = ? where departmentid = ?";
+      $stmt= $mydb->prepare($sql);  
+      $stmt->bind_param('si', $this->status, $this->id);  
+      $stmt->execute();
+      $stmt->get_result();
+      $mydb->close();
+  } 
+  
+  public function getDepartmentIdByName()
+   {
+      $mydb = db_connect();
+      $sql = "SELECT departmentid FROM tbldepartment WHERE departmentlongname = ?";
+      $stmt= $mydb->prepare($sql);  
+      $stmt->bind_param('s', $this->department);
+      $stmt->execute();
+      $result = $stmt->get_result();
+      $mydb->close();
+      $row = mysqli_fetch_object($result);
+           $data = $row->departmentid;
+           return $data;     
+   }
