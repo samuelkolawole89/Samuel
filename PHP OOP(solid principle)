@@ -1,0 +1,56 @@
+<?php
+//this involves creating methods using interface abstraction
+interface garage_plate{
+    public function my_platenumber();
+}
+
+class Garage {
+    var $total_vehicles;
+    var $holding_capacity;
+    var $left_to_hold;
+    
+    function lefttohold(){
+        return $this->holding_capacity - $this->total_items;
+    }
+}
+
+
+class Cars Implements garage_plate {
+    var $name;
+    var $serial_num;
+    var $plate_num;
+    var $model;
+      
+    function my_platenumber(){
+        //implementation......
+        if(!empty($this->serial_num) && !empty($this->name) && !empty($this->model)) {
+        return $this->plate_num;
+        }
+    }  
+}
+
+class Bus Implements garage_plate {
+     var $name;
+     var $serial_num;
+     var $plate_num;
+     
+     function my_platenumber(){
+        if(!empty($this->serial_num) && !empty($this->name)) {
+        return $this->plate_num;
+        }
+    }
+}
+
+class Van Implements garage_plate {
+    var $owner;
+    var $serial_num;
+    var $plate_num;
+    
+    function my_platenumber() {
+        if(!empty($this->serial_num) && !empty($this->owner)) {
+        return $this->plate_num;
+        }
+    }
+}
+
+?>
