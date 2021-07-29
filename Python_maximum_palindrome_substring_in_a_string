@@ -1,0 +1,25 @@
+#this program gets the highest substring that occurs in a string
+def palindsubstr(string):
+	maxlength = 1
+	start = 0
+	length = len(string)
+	for i in xrange(1, length):
+		low = i - 1
+		high = i
+		#even range of substring e.g “ab” or “abcd” i.e count of substring is even
+		while low >= 0 and high < length and string[low] == string[high]:
+			if high - low + 1 > maxlength:
+				start = low
+				maxlength = high - low + 1
+			high += 1
+			low -= 1
+		low = i - 1
+		high = i + 1
+		#odd range of substring e.g “abc” or “abcde” i.e count of substring is odd
+		while low >= 0 and high < length and string[low] == string[high]:
+			if high - low + 1 > maxlength:
+				start = low
+				maxlength = high - low + 1
+			high += 1
+			low -= 1
+	return string[start:start+maxlength]
