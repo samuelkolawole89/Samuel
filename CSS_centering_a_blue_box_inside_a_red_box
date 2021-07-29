@@ -1,0 +1,23 @@
+/* HTML */
+<div class = "red-box">
+            <div class = "blue-box"></div>
+</div>
+
+/* CSS */
+.red-box {
+    width: 640px;
+    height: 732px;
+    background: red;
+    position: relative;
+}
+.blue-box {
+    margin: auto;
+    position: absolute;
+    top:0; left:0; bottom:0; right:0;
+        
+    width: 200px;
+    height: 200px;
+    background: blue;
+}
+
+
