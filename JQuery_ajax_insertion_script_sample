@@ -1,0 +1,66 @@
+                    function ajax_insert(){
+                    var collegeid = $('#collegeid').val();
+                    var departmentid = $('#departmentid').val();
+                    var programmeid = $('#programmeid').val();
+                    var coursecode = $('#coursecode').val();
+                    var coursetitle = $('#coursetitle').val();
+                    var unit = $('#unit').val();
+                    var coursestatus = $('#coursestatus').val();
+                    var level = $('#level').val();
+                    
+                   var coursecode = $('#coursecode').val();
+                   var coursetitle = $('#coursetitle').val();
+                    
+                    var pattern = /^([a-z]{3}[1-9]{1}[0-9]{1}[0-9]{1})$/;
+                    var pattern1 = /^[a-z]+$/;
+                    var pattern2 = /^([a-z]+[" "][a-z]+)+$/;
+                    
+                    if(collegeid == 0){
+                        alert('pls select college');
+                        return false;
+                    }
+                   
+                    if(departmentid == 0){
+                        alert('department field cannot be empty');
+                        return false;
+                    }
+                                      
+                    if(programmeid == 0){
+                        alert('programme field cannot be empty');
+                      return false;
+                    }
+                    
+                        if(coursecode == ''){
+                          alert('course code cannot be empty');
+                        return false;
+                    }
+                    if(!(coursecode.match(pattern))){
+                            alert('course code mismatch');
+                        return false;
+                    }
+                    if(coursetitle == ''){
+                            alert('course title cannot be empty');
+                        return false;
+                    }
+      
+                    if(!(coursetitle.match(pattern1) || coursetitle.match(pattern2))){ 
+                            alert('course title mismatch');
+                        return false;
+                    }
+ 
+      
+            $.ajax({
+                type:'POST',                
+                url: "../ajax_curriculum/add.php",
+                data: {'collegeid':collegeid,'departmentid':departmentid,'programmeid':programmeid,'coursecode':coursecode,'coursetitle':coursetitle,'unit':unit,'coursestatus':coursestatus,'level':level},                    
+                cache:false,
+                success:function(data){                
+                  alertify.alert(data);
+                  $('#msg').html(data);
+           
+                },
+                error:function(){
+            alertify.alert('Oops! Pls Retry');
+                }
+            });
+                }
