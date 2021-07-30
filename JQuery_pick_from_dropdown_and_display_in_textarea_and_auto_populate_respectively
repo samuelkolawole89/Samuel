@@ -1,4 +1,12 @@
-    //this code selects from a dropdown button, after clicking #pick_courseprefix it displays the option value in a textarea without duplicating them   
+    //this code selects from a dropdown button, after clicking #pick_courseprefix it displays the option value in a textarea without duplicating them
+    
+    //unique is used to ensure there are no duplicate value
+    function unique(array){
+        return $.grep(array, function(el,index){
+            return index === $.inArray(el,array);
+        });
+    }
+    
     $('#pick_courseprefix').on('click',function(){
    var coursepre = $('#coursepre').val();
    var newcourse_pre = $('#picked_cosprefix').val();
