@@ -1,0 +1,29 @@
+//edit properies of a row in a table and determine what properties needs to be displayed and hidden, '.'prefix indicates class '#'prefix indicates id
+    $('.editbutt').each(function(index){    
+    var index = index + 1;    
+    var iterstring = index.toString();
+    var back = ".backbut#backbut"+iterstring;
+    var edit = ".editbutt#editbutt"+iterstring;
+    var update = ".updatebut#updatebut"+iterstring;
+    var htmlscore = "#htmlfieldscore"+iterstring;
+    var htmlremark = "#htmlfieldremark"+iterstring;
+    var htmlmatno = "#htmlfieldmatno"+iterstring;
+    var score = "#fieldnamescore"+iterstring;
+    var remark = "#fieldnameremark"+iterstring;
+    var matno = "#fieldnamematno"+iterstring;
+    $(edit).click(function(){
+        $('.validate').hide();
+        $('.notice').hide();
+        $(back).show();
+        $(score).show();
+        $(remark).show();
+        $(matno).show();
+        $(update).show();
+        $(edit).hide();
+        $(htmlscore).hide();
+        $(htmlremark).hide();
+        $(htmlmatno).hide();
+        //it could be written as $('.validate, .notice').hide();
+        
+    });
+                                            });
