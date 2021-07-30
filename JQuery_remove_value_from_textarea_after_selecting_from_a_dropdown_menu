@@ -1,0 +1,20 @@
+ $('#del_courseprefix').on('click',function(){
+       var array = [];
+            var coursepre_edit = $('#coursepre_edit').val();
+            var newcourse_pres = $('#picked_cosprefix').val();
+            if(newcourse_pres !== "")
+            array = newcourse_pres.split(",");
+
+$('#coursepre_edit').find('option[value='+coursepre_edit+']').remove();
+var length = $('#coursepre_edit > option').length;
+   if(length == 0){
+       $('#coursepre_edit,#del_courseprefix').hide();
+   }
+   
+array = $.grep(array, function(value){
+    return value != coursepre_edit;
+    });
+
+$('#picked_cosprefix').val(array.join(','));
+
+});
