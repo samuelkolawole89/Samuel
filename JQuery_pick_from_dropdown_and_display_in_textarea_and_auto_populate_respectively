@@ -1,0 +1,27 @@
+    //this code selects from a dropdown button, after clicking #pick_courseprefix it displays the option value in a textarea without duplicating them   
+    $('#pick_courseprefix').on('click',function(){
+   var coursepre = $('#coursepre').val();
+   var newcourse_pre = $('#picked_cosprefix').val();
+   var arr = [];
+   var brr = [];
+
+   if(coursepre == null){
+   }
+   else{
+   $('#del_courseprefix').show();
+   if(newcourse_pre !== "")
+    arr = newcourse_pre.split(",");
+    brr = coursepre;
+    arr = arr.concat(brr);
+    arr = unique(arr);
+                                               
+    $('#picked_cosprefix').val(arr.join(','));  
+           
+   var newcourse_pres = $('#picked_cosprefix').val();
+   $('#coursepre_edit').html('');
+   var text_to_add = newcourse_pres.split(",");
+   $(text_to_add).each(function(k,v){
+    $('#coursepre_edit').append("<option value="+v+">"+v+"</option>").show();
+    });
+    }
+   });
